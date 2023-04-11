@@ -2,9 +2,9 @@ package com.app.skillsify;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+@SpringBootApplication(scanBasePackages = {
+        "com.app.skillsify", "com.app.skillsify"})
 public class SkillsifyApplication {
 
     public static void main(String[] args) {
