@@ -49,6 +49,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter implements Use
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("User not found!"));
+        User user = userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("User not found!"));
+        return user;
     }
 }

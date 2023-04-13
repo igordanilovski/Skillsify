@@ -9,9 +9,15 @@ import com.app.skillsify.repositories.UserRepository;
 import com.app.skillsify.services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,11 +26,13 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtilities jwtUtilities;
+    private final AuthenticationManager authenticationManager;
 
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtUtilities jwtUtilities) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtUtilities jwtUtilities, AuthenticationManager authenticationManager) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtUtilities = jwtUtilities;
+        this.authenticationManager = authenticationManager;
     }
 
     @Override
@@ -47,12 +55,21 @@ public class UserServiceImpl implements UserService {
         user.setRole(Role.STANDARD); //Default
         userRepository.save(user);
 
-        //String token = jwtUtilities.generateToken(registerDto.getEmail(), "");
-        return new ResponseEntity<>("", HttpStatus.OK);
+        List<String> rolesNames = new ArrayList<>();
+        rolesNames.add(user.getRole().name());
+
+        String token = jwtUtilities.generateToken(registerDto.getEmail(), rolesNames);
+        return new ResponseEntity<>(token, HttpStatus.OK);
     }
 
     @Override
     public String authenticate(LoginDto loginDto) {
-        return "";
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword()));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        User user = userRepository.findByUsername(authentication.getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        String s = "";
+        List<String> rolesNames = new ArrayList<>();
+        rolesNames.add(user.getRole().name());
+        return jwtUtilities.generateToken(user.getUsername(), rolesNames);
     }
 }
