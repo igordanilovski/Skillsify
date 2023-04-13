@@ -8,8 +8,8 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RegisterDto {
     //it's a Data Trasfer Object for registration
-    String firstName ;
-    String lastName ;
+    String firstName;
+    String lastName;
     String email;
-    String password ;
+    String password;
 }
