@@ -12,6 +12,13 @@ public class Course {
 
     private String name;
 
+    @ManyToOne
+    @JoinColumn(
+            name = "user_creator",
+            referencedColumnName = "id"
+    )
+    private User user;
+
     public Course() {
     }
 
