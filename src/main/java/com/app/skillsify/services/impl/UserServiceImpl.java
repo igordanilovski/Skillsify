@@ -59,17 +59,21 @@ public class UserServiceImpl implements UserService {
         rolesNames.add(user.getRole().name());
 
         String token = jwtUtilities.generateToken(registerDto.getEmail(), rolesNames);
+
         return new ResponseEntity<>(token, HttpStatus.OK);
     }
 
     @Override
-    public String authenticate(LoginDto loginDto) {
+    public ResponseEntity<?> authenticate(LoginDto loginDto) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         User user = userRepository.findByUsername(authentication.getName()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        String s = "";
+
         List<String> rolesNames = new ArrayList<>();
         rolesNames.add(user.getRole().name());
-        return jwtUtilities.generateToken(user.getUsername(), rolesNames);
+
+        String token = jwtUtilities.generateToken(user.getUsername(), rolesNames);
+
+        return new ResponseEntity<>(token, HttpStatus.OK);
     }
 }

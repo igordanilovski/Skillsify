@@ -12,5 +12,5 @@ public interface UserService {
 
     ResponseEntity<?> register(RegisterDto registerDto);
 
-    String authenticate(LoginDto loginDto);
+    ResponseEntity<?> authenticate(LoginDto loginDto);
 }

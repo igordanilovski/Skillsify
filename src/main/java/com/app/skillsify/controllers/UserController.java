@@ -14,18 +14,17 @@ import java.util.Optional;
 public class UserController {
     private final UserService userService;
 
-
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> getCourseByName(@RequestBody RegisterDto registerDto) {
+    public ResponseEntity<?> register(@RequestBody RegisterDto registerDto) {
         return this.userService.register(registerDto);
     }
 
     @PostMapping("/login")
-    public String getCourseByName(@RequestBody LoginDto loginDto) {
+    public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
         return this.userService.authenticate(loginDto);
     }
 }
