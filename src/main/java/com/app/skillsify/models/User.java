@@ -45,6 +45,9 @@ public class User implements UserDetails {
     @Column()
     private Date updatedAt;
 
+    @OneToMany
+    private List<CourseReview> userCourseReviews;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
