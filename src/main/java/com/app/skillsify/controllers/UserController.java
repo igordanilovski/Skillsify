@@ -1,13 +1,10 @@
 package com.app.skillsify.controllers;
 
-import com.app.skillsify.models.Course;
 import com.app.skillsify.models.dto.LoginDto;
 import com.app.skillsify.models.dto.RegisterDto;
 import com.app.skillsify.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
