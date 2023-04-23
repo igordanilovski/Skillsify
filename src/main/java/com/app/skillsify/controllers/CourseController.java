@@ -1,7 +1,7 @@
 package com.app.skillsify.controllers;
 
 import com.app.skillsify.models.Course;
-import com.app.skillsify.models.CourseAnnouncements;
+import com.app.skillsify.models.CourseAnnouncement;
 import com.app.skillsify.services.CourseAnnouncementService;
 import com.app.skillsify.services.CourseService;
 import com.app.skillsify.services.UserService;
@@ -25,7 +25,7 @@ public class CourseController {
 
 
     @GetMapping("/test")
-    public List<CourseAnnouncements> test() {
+    public List<CourseAnnouncement> test() {
         return this.courseAnnouncementService.findAll();
     }
 

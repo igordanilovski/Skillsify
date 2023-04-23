@@ -1,6 +1,6 @@
 package com.app.skillsify.services.impl;
 
-import com.app.skillsify.models.CourseAnnouncements;
+import com.app.skillsify.models.CourseAnnouncement;
 import com.app.skillsify.repositories.CourseAnnouncementsRepository;
 import com.app.skillsify.services.CourseAnnouncementService;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ public class CourseAnnouncementServiceImpl implements CourseAnnouncementService 
     }
 
     @Override
-    public List<CourseAnnouncements> findAll() {
+    public List<CourseAnnouncement> findAll() {
         return this.courseAnnouncementsRepository.findAll();
     }
 }
