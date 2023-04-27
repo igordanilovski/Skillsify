@@ -19,6 +19,9 @@ public class Course {
     @Column(nullable = false)
     private String name;
 
+    @Column(name = "about_text", nullable = false)
+    private String about;
+
     @Enumerated(value = EnumType.STRING)
     @Column(name = "skill_level_required", nullable = false)
     private Skill skillRequired;
@@ -59,6 +62,9 @@ public class Course {
 
     @Column(nullable = false)
     private Date createdAt;
+
+    @Column()
+    private Date updatedAt;
 
     public Course() {
         this.courseQuestions = new ArrayList<>();
