@@ -8,7 +8,6 @@ import java.util.*;
 
 public interface CourseService {
     List<Course> findAll();
-
     Optional<Course> findByName(String name);
 
     Optional<Course> findById(Long id);
