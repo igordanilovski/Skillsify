@@ -1,12 +1,10 @@
 package com.app.skillsify.controllers;
 
 import com.app.skillsify.models.Course;
-import com.app.skillsify.models.CourseAnnouncement;
 import com.app.skillsify.models.dto.CourseDto;
 import com.app.skillsify.services.CourseAnnouncementService;
 import com.app.skillsify.services.CourseService;
 import com.app.skillsify.services.UserService;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -45,12 +43,12 @@ public class CourseController {
     }
 
     @PostMapping
-    private Course create(@RequestBody CourseDto courseDto) {
-        return this.courseService.create(courseDto);
+    private ResponseEntity<Course> create(@RequestBody CourseDto courseDto) {
+        return ResponseEntity.ok().body(this.courseService.create(courseDto));
     }
 
     @PutMapping("/{id}")
-    private Course edit(@PathVariable Long id, @RequestBody CourseDto courseDto) {
-        return this.courseService.edit(id, courseDto);
+    private ResponseEntity<Course> edit(@PathVariable Long id, @RequestBody CourseDto courseDto) {
+        return ResponseEntity.ok().body(this.courseService.edit(id, courseDto));
     }
 }
