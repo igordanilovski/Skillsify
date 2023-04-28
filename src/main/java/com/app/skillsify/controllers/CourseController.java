@@ -6,12 +6,15 @@ import com.app.skillsify.models.dto.CourseDto;
 import com.app.skillsify.services.CourseAnnouncementService;
 import com.app.skillsify.services.CourseService;
 import com.app.skillsify.services.UserService;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/courses")
 public class CourseController {
     private final CourseService courseService;
@@ -30,13 +33,15 @@ public class CourseController {
 //    }
 
     @GetMapping
-    public List<Course> findAll() {
-        return this.courseService.findAll();
+    public ResponseEntity<List<Course>> findAll() {
+        return ResponseEntity.ok()
+                .body(this.courseService.findAll());
     }
 
     @GetMapping("/{id}")
-    public Optional<Course> findById(@PathVariable Long id) {
-        return this.courseService.findById(id);
+    public ResponseEntity<Optional<Course>> findById(@PathVariable Long id) {
+        return ResponseEntity.ok()
+                .body(this.courseService.findById(id));
     }
 
     @PostMapping
