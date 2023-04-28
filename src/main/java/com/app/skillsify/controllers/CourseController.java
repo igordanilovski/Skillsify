@@ -34,13 +34,8 @@ public class CourseController {
         return this.courseService.findAll();
     }
 
-    @GetMapping("/{name}")
-    public Optional<Course> findByName(@PathVariable String name) {
-        return this.courseService.findByName(name);
-    }
-
     @GetMapping("/{id}")
-    public Optional<Course> findByName(@PathVariable Long id) {
+    public Optional<Course> findById(@PathVariable Long id) {
         return this.courseService.findById(id);
     }
 
