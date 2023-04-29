@@ -8,6 +8,7 @@ import java.util.Date;
 
 @Entity(name = "course_reviews")
 @Data
+@IdClass(CourseReviewId.class)
 public class CourseReview {
     @Id
     @ManyToOne
