@@ -13,4 +13,6 @@ public interface UserService {
     ResponseEntity<?> register(RegisterDto registerDto);
 
     ResponseEntity<?> authenticate(LoginDto loginDto);
+
+    User findByUsername(String username);
 }

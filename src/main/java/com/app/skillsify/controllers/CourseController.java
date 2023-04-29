@@ -2,6 +2,7 @@ package com.app.skillsify.controllers;
 
 import com.app.skillsify.models.Course;
 import com.app.skillsify.models.dto.CourseDto;
+import com.app.skillsify.models.dto.EnrollmentDto;
 import com.app.skillsify.services.CourseAnnouncementService;
 import com.app.skillsify.services.CourseService;
 import com.app.skillsify.services.UserService;
@@ -50,5 +51,15 @@ public class CourseController {
     @PutMapping("/{id}")
     private ResponseEntity<Course> edit(@PathVariable Long id, @RequestBody CourseDto courseDto) {
         return ResponseEntity.ok().body(this.courseService.edit(id, courseDto));
+    }
+
+    @PostMapping("/delete/{id}")
+    private void delete(@PathVariable Long id){
+        this.courseService.deleteById(id);
+    }
+
+    @PostMapping("/enrollUser")
+    private ResponseEntity<Course> enrollUser(@RequestBody EnrollmentDto enrollmentDto){
+        return ResponseEntity.ok().body(this.courseService.enrollUser(enrollmentDto));
     }
 }
