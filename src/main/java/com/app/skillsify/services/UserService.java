@@ -15,4 +15,6 @@ public interface UserService {
     ResponseEntity<?> authenticate(LoginDto loginDto);
 
     User findByUsername(String username);
+
+    User findById(Long id);
 }
