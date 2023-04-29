@@ -26,7 +26,7 @@ public class CourseReviewController {
         return ResponseEntity.ok().body(this.courseReviewService.editReview(courseReviewDtoWithCompositeIdDto));
     }
 
-    @PostMapping("/delete-review")
+    @DeleteMapping("/delete-review")
     private void deleteReview(@RequestBody CourseReviewId courseReviewId){
         this.courseReviewService.deleteReview(courseReviewId);
     }

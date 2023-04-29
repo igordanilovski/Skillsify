@@ -10,6 +10,7 @@ import com.app.skillsify.repositories.CourseReviewRepository;
 import com.app.skillsify.services.CourseReviewService;
 import com.app.skillsify.services.CourseService;
 import com.app.skillsify.services.UserService;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -53,6 +54,7 @@ public class CourseReviewServiceImpl implements CourseReviewService {
     }
 
     @Override
+    @Transactional
     public void deleteReview(CourseReviewId courseReviewId) {
         if(courseReviewId.getCourse() != null && courseReviewId.getUser() != null) {
             this.courseReviewRepository.deleteByCourseAndUser(this.courseService.findById(courseReviewId.getCourse()).orElseThrow(),
