@@ -76,4 +76,9 @@ public class UserServiceImpl implements UserService {
 
         return new ResponseEntity<>(token, HttpStatus.OK);
     }
+
+    @Override
+    public User findByUsername(String username) {
+        return this.userRepository.findByUsername(username).orElseThrow();
+    }
 }

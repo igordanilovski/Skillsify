@@ -4,6 +4,7 @@ import com.app.skillsify.models.Course;
 import com.app.skillsify.models.CourseAnnouncement;
 import com.app.skillsify.models.User;
 import com.app.skillsify.models.dto.CourseDto;
+import com.app.skillsify.models.dto.EnrollmentDto;
 import com.app.skillsify.repositories.CourseAnnouncementsRepository;
 import com.app.skillsify.repositories.CourseRepository;
 import com.app.skillsify.repositories.UserRepository;
@@ -92,5 +93,17 @@ public class CourseServiceImpl implements CourseService {
         c.setUpdatedAt(new Date());
 
         return this.courseRepository.save(c);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        this.courseRepository.deleteById(id);
+    }
+
+    @Override
+    public Course enrollUser(EnrollmentDto enrollmentDto) {
+        Course course = this.courseRepository.findById(enrollmentDto.getCourseId()).orElseThrow();
+        course.getParticipants().add(this.userRepository.findByUsername(enrollmentDto.getUsername()).orElseThrow());
+        return this.courseRepository.save(course);
     }
 }
