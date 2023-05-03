@@ -1,31 +1,24 @@
 package com.app.skillsify.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
-
-import java.util.ArrayList;
-import java.util.List;
+import lombok.NoArgsConstructor;
 
 @Entity(name = "course_announcements")
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Data
 public class CourseAnnouncement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "course_id", nullable = false)
-    @JsonBackReference
-    private Course course;
+    private Long authorId;
 
-    @OneToMany
-    @JoinColumn(name = "parent_announcement_id", nullable = true)
-    private List<CourseAnnouncement> childAnnouncements;
-
-    @Column(name = "parent_announcement_id")
-    private Long parent_announcement_id;
+    private Long courseId;
 
     @Column(nullable = false)
     private String headline;
@@ -33,7 +26,4 @@ public class CourseAnnouncement {
     @Column(nullable = false)
     private String textContent;
 
-    public CourseAnnouncement() {
-        //this.childAnnouncements = new ArrayList<>();
-    }
 }

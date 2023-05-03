@@ -44,17 +44,6 @@ public class CourseServiceImpl implements CourseService {
             rootMap.put(obj.getId(), obj);
         });
 
-        temp.forEach(obj -> {
-            if (obj.getParent_announcement_id() == null) {
-                root.add(obj);
-            } else {
-                CourseAnnouncement tempAnnouncement = rootMap.get(obj.getParent_announcement_id());
-                if (tempAnnouncement != null) {
-                    tempAnnouncement.setChildAnnouncements(new ArrayList<>());
-                    tempAnnouncement.getChildAnnouncements().add(obj);
-                }
-            }
-        });
         courses.get(0).setCourseAnnouncements(root);
 
         return courses;

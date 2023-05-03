@@ -48,8 +48,7 @@ public class Course {
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> participants;
 
-    @OneToMany(mappedBy = "course")
-    @JsonManagedReference
+    @OneToMany(mappedBy = "courseId")
     private List<CourseAnnouncement> courseAnnouncements;
 
     @OneToMany(mappedBy = "course")
