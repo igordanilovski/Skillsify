@@ -1,5 +1,6 @@
 package com.app.skillsify.controllers;
 
+import com.app.skillsify.models.dto.AccountDetailsDto;
 import com.app.skillsify.models.dto.LoginDto;
 import com.app.skillsify.models.dto.RegisterDto;
 import com.app.skillsify.services.UserService;
@@ -24,5 +25,10 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
         return this.userService.authenticate(loginDto);
+    }
+
+    @GetMapping("/account-details/{username}")
+    public AccountDetailsDto getUserDetails(@PathVariable String username){
+        return this.userService.getUserDetails(username);
     }
 }
