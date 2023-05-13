@@ -2,6 +2,7 @@ package com.app.skillsify.services.impl;
 
 import com.app.skillsify.jwtUtils.JwtUtilities;
 import com.app.skillsify.models.User;
+import com.app.skillsify.models.dto.AccountDetailsDto;
 import com.app.skillsify.models.dto.LoginDto;
 import com.app.skillsify.models.dto.RegisterDto;
 import com.app.skillsify.models.enumerations.Role;
@@ -17,6 +18,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.AbstractCollection;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -85,5 +87,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findById(Long id) {
         return this.userRepository.findById(id).orElseThrow();
+    }
+
+    @Override
+    public AccountDetailsDto getUserDetails(String username) {
+        User user = findByUsername(username);
+        AccountDetailsDto accountDetailsDto = new AccountDetailsDto();
+        accountDetailsDto.setUsername(username);
+        accountDetailsDto.setFirstName(user.getFirstName());
+        accountDetailsDto.setLastName(user.getLastName());
+        accountDetailsDto.setEmail(user.getEmail());
+        accountDetailsDto.setCreatedAt(user.getCreatedAt());
+        return accountDetailsDto;
     }
 }

@@ -1,6 +1,7 @@
 package com.app.skillsify.services;
 
 import com.app.skillsify.models.User;
+import com.app.skillsify.models.dto.AccountDetailsDto;
 import com.app.skillsify.models.dto.LoginDto;
 import com.app.skillsify.models.dto.RegisterDto;
 import org.springframework.http.ResponseEntity;
@@ -17,4 +18,6 @@ public interface UserService {
     User findByUsername(String username);
 
     User findById(Long id);
+
+    AccountDetailsDto getUserDetails(String username);
 }
