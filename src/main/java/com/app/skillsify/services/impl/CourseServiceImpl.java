@@ -65,6 +65,7 @@ public class CourseServiceImpl implements CourseService {
         User userCreator = this.userRepository.findById(courseDto.getUserId()).get();
 
         c.setName(courseDto.getName());
+        c.setDescription(courseDto.getDescription());
         c.setAbout(courseDto.getAbout());
         c.setCreator(userCreator);
         c.setCreatedAt(new Date());

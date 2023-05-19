@@ -9,5 +9,5 @@ public class CourseDto {
     private Long userId;
     private String about;
     private Skill skill;
-
+    private String description;
 }
