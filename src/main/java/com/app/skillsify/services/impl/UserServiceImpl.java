@@ -6,8 +6,10 @@ import com.app.skillsify.models.dto.AccountDetailsDto;
 import com.app.skillsify.models.dto.LoginDto;
 import com.app.skillsify.models.dto.RegisterDto;
 import com.app.skillsify.models.enumerations.Role;
+import com.app.skillsify.models.mapper.AccountDetailsDtoMapper;
 import com.app.skillsify.repositories.UserRepository;
 import com.app.skillsify.services.UserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -30,11 +32,14 @@ public class UserServiceImpl implements UserService {
     private final JwtUtilities jwtUtilities;
     private final AuthenticationManager authenticationManager;
 
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtUtilities jwtUtilities, AuthenticationManager authenticationManager) {
+    private final AccountDetailsDtoMapper accountDetailsDtoMapper;
+
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtUtilities jwtUtilities, AuthenticationManager authenticationManager, AccountDetailsDtoMapper accountDetailsDtoMapper) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtUtilities = jwtUtilities;
         this.authenticationManager = authenticationManager;
+        this.accountDetailsDtoMapper = accountDetailsDtoMapper;
     }
 
     @Override
@@ -55,6 +60,11 @@ public class UserServiceImpl implements UserService {
         user.setCreatedAt(new Date());
         user.setPassword(this.passwordEncoder.encode(registerDto.getPassword()));
         user.setRole(Role.STANDARD); //Default
+        user.setGender(registerDto.getGender());
+        user.setDateOfBirth(registerDto.getDateOfBirth());
+        user.setNationality(registerDto.getNationality());
+        user.setAddress(registerDto.getAddress());
+        user.setPhoneNumber(registerDto.getPhoneNumber());
         userRepository.save(user);
 
         List<String> rolesNames = new ArrayList<>();
@@ -91,13 +101,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public AccountDetailsDto getUserDetails(String username) {
-        User user = findByUsername(username);
-        AccountDetailsDto accountDetailsDto = new AccountDetailsDto();
-        accountDetailsDto.setUsername(username);
-        accountDetailsDto.setFirstName(user.getFirstName());
-        accountDetailsDto.setLastName(user.getLastName());
-        accountDetailsDto.setEmail(user.getEmail());
-        accountDetailsDto.setCreatedAt(user.getCreatedAt());
-        return accountDetailsDto;
+        return detailsMapper(findByUsername(username));
+    }
+
+    public AccountDetailsDto detailsMapper(User user){
+        return this.accountDetailsDtoMapper.apply(user);
     }
 }
