@@ -51,18 +51,15 @@ public class UserServiceImpl implements UserService {
     public ResponseEntity<?> register(RegisterDto registerDto) {
         User user = new User();
 
-        String generatedUsernameFromFirstAndLastName = (registerDto.getFirstName().toLowerCase() + registerDto.getLastName()).toLowerCase().replaceAll("[^a-z0-9-]", "");
+        String generatedUsernameFromFirstAndLastName = (registerDto.getFullName()).toLowerCase().replaceAll("[^a-z0-9-]", "");
 
         user.setEmail(registerDto.getEmail());
-        user.setFirstName(registerDto.getFirstName());
-        user.setLastName(registerDto.getLastName());
+        user.setFullName(registerDto.getFullName());
         user.setUsername(generatedUsernameFromFirstAndLastName);
         user.setCreatedAt(new Date());
         user.setPassword(this.passwordEncoder.encode(registerDto.getPassword()));
         user.setRole(Role.STANDARD); //Default
-        user.setGender(registerDto.getGender());
         user.setDateOfBirth(registerDto.getDateOfBirth());
-        user.setNationality(registerDto.getNationality());
         user.setAddress(registerDto.getAddress());
         user.setPhoneNumber(registerDto.getPhoneNumber());
         userRepository.save(user);
