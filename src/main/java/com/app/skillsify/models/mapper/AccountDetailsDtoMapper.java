@@ -13,12 +13,10 @@ public class AccountDetailsDtoMapper implements Function<User, AccountDetailsDto
     @Override
     public AccountDetailsDto apply(User user) {
         return new AccountDetailsDto(
-                user.getFirstName(),
-                user.getLastName(),
+                user.getFullName(),
                 user.getEmail(),
                 user.getUsername(),
                 user.getDateOfBirth(),
-                user.getNationality(),
                 user.getAddress(),
                 user.getPhoneNumber()
         );

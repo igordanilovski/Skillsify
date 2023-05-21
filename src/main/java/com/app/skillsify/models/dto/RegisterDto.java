@@ -9,13 +9,10 @@ import java.util.Date;
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class RegisterDto {
-    String firstName;
-    String lastName;
-    String gender;
+    String fullName;
     Date dateOfBirth;
-    String nationality;
-    String address;
     String phoneNumber;
+    String address;
     String email;
     String password;
 }

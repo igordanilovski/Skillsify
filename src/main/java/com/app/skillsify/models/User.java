@@ -34,19 +34,13 @@ public class User implements UserDetails {
     private String password;
 
     @Column(nullable = false)
-    private String firstName;
-
-    @Column(nullable = false)
-    private String lastName;
+    private String fullName;
 
     @Column(nullable = false)
     private Date createdAt;
 
     @Column()
     private Date updatedAt;
-
-    @Column(name = "nationality")
-    private String nationality;
 
     @Column(name = "address")
     private String address;
@@ -57,8 +51,6 @@ public class User implements UserDetails {
     @Column(name = "date_of_birth")
     private Date dateOfBirth;
 
-    @Column(name = "gender")
-    private String gender;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
