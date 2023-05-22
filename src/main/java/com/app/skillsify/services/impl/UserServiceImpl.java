@@ -92,13 +92,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findByEmail(String email) {
+        return this.userRepository.findByEmail(email).orElseThrow();
+    }
+
+    @Override
     public User findById(Long id) {
         return this.userRepository.findById(id).orElseThrow();
     }
 
     @Override
-    public AccountDetailsDto getUserDetails(String username) {
-        return detailsMapper(findByUsername(username));
+    public AccountDetailsDto getUserDetails(String email) {
+        return detailsMapper(findByEmail(email));
     }
 
     public AccountDetailsDto detailsMapper(User user){

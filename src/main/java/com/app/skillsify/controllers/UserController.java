@@ -27,8 +27,8 @@ public class UserController {
         return this.userService.authenticate(loginDto);
     }
 
-    @GetMapping("/account-details/{username}")
-    public AccountDetailsDto getUserDetails(@PathVariable String username){
-        return this.userService.getUserDetails(username);
+    @GetMapping("/account-details/{email}")
+    public AccountDetailsDto getUserDetails(@PathVariable String email){
+        return this.userService.getUserDetails(email);
     }
 }
