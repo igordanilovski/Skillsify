@@ -1,6 +1,7 @@
 package com.app.skillsify.models;
 
 import com.app.skillsify.models.enumerations.Role;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -51,6 +52,13 @@ public class User implements UserDetails {
     @Column(name = "date_of_birth")
     private Date dateOfBirth;
 
+    @ManyToMany
+    @JoinTable(
+            name = "course_has_participants",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id"))
+    @JsonBackReference
+    private List<Course> courses;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

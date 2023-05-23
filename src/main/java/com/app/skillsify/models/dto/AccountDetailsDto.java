@@ -1,6 +1,9 @@
 package com.app.skillsify.models.dto;
 
+import com.app.skillsify.models.Course;
+
 import java.util.Date;
+import java.util.List;
 
 
 public record AccountDetailsDto (
@@ -9,6 +12,7 @@ public record AccountDetailsDto (
     String username,
     Date dateOfBirth,
     String address,
-    String phoneNumber
+    String phoneNumber,
+    List<UserCoursesDto> courses
     ){
 }
