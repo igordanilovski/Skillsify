@@ -93,7 +93,7 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public Course enrollUser(EnrollmentDto enrollmentDto) {
         Course course = this.courseRepository.findById(enrollmentDto.getCourseId()).orElseThrow();
-        course.getParticipants().add(this.userRepository.findByUsername(enrollmentDto.getUsername()).orElseThrow());
+        course.getParticipants().add(this.userRepository.findByEmail(enrollmentDto.getEmail()).orElseThrow());
         return this.courseRepository.save(course);
     }
 }

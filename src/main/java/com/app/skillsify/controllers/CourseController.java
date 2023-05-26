@@ -58,7 +58,7 @@ public class CourseController {
         this.courseService.deleteById(id);
     }
 
-    @PostMapping("/enrollUser")
+    @PostMapping("/enroll-user")
     private ResponseEntity<Course> enrollUser(@RequestBody EnrollmentDto enrollmentDto){
         return ResponseEntity.ok().body(this.courseService.enrollUser(enrollmentDto));
     }

@@ -4,6 +4,6 @@ import lombok.Getter;
 
 @Getter
 public class EnrollmentDto {
-    String username;
+    String email;
     Long courseId;
 }
